@@ -127,3 +127,5 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+node_modules
+coverage

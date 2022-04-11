@@ -8,11 +8,9 @@ export function GameSearch(props: any) {
     const [searchResult, setSearchResult] = useState<any[]>([]);
     const [initialList, setInitalList] = useState<any[]>([]);
 
-    const API_KEY = process.env.REACT_APP_API_KEY;
-
     // Populate page with random set of games (most likely current popular games)
     useEffect(() => {
-        axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`).then((response) => {
+        axios.get(`http://localhost:3001/games/`).then((response) => {
             setInitalList(response.data.results);
         });
     });
@@ -22,7 +20,7 @@ export function GameSearch(props: any) {
     };
 
     const onSubmit = () => {
-        axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${value}`).then((response) => {
+        axios.post('http://localhost:3001/search', { query: value }).then((response) => {
             setSearchResult(response.data.results);
         });
     };
@@ -33,8 +31,8 @@ export function GameSearch(props: any) {
             <h1>Search Results:</h1>
             <div id='result-container'>
                 {searchResult.length < 1
-                    ? initialList.map((initialResult: any) => <GameResult name={initialResult.name} screenshot={initialResult.short_screenshots[0].image} id={initialResult.id} />)
-                    : searchResult.map((result: any) => <GameResult name={result.name} screenshot={result.short_screenshots[0].image} id={result.id} />)}
+                    ? initialList.map((initialResult: any, index: number) => <GameResult name={initialResult.name} screenshot={initialResult.short_screenshots[0].image} id={initialResult.id} key={index} />)
+                    : searchResult.map((result: any, index: number) => <GameResult name={result.name} screenshot={result.short_screenshots[0].image} id={result.id} key={index} />)}
             </div>
         </div>
     );
