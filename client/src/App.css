@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+#result-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+#nav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.search-field {
+  float: right;
+  background-color: white;
+}
+
+.search-button {
+  float: right;
+  background-color: #4d4d4d;
+}
